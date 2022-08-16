@@ -119,6 +119,7 @@ function combatResult() {
     btnAttackFire.disabled = true;
     btnAttackWater.disabled = true;
     btnAttackEarth.disabled = true;
+    restartSectionDisplay(true);
   }
   
   if (opponent.lives === 0) {
@@ -133,15 +134,31 @@ function restartGame() {
   location.reload();
 }
 
+
+// FUNCIONES PARA MOSTRAR O DESAPARECER PARTES DE LA UI
+function selectAttackSectionDisplay(show) {
+  const selectAttackSection = document.querySelector('#selectAttack');
+  selectAttackSection.style.display = (show) ? 'block' : 'none';
+}
+function restartSectionDisplay(show) {
+  const restartSection = document.querySelector('#restart');
+  restartSection.style.display = (show) ? 'block' : 'none';
+}
+
 // INICIO DEL JUEGO
 function startGame() {
+  selectAttackSectionDisplay(false);
+  restartSectionDisplay(false);
   const btnSelectPet = document.querySelector('#buttonSelectPet');
   const btnRestart = document.querySelector('#buttonRestart');
   const btnAttackFire = document.querySelector('#buttonAttackFire');
   const btnAttackWater = document.querySelector('#buttonAttackWater');
   const btnAttackEarth = document.querySelector('#buttonAttackEarth');
 
-  btnSelectPet.onclick = () => player.name = selectPlayerPet();
+  btnSelectPet.onclick = () => {
+    player.name = selectPlayerPet();
+    player.name && selectAttackSectionDisplay(true);
+  }
 
   btnAttackFire.onclick = () => attackPlayer('FUEGO');
   btnAttackWater.onclick = () => attackPlayer('AGUA');
