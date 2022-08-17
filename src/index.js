@@ -46,6 +46,8 @@ function selectPlayerPet() {
   if (selectPet) {
     playerPet.innerText = selectPet.id.toUpperCase()
     opponent.name = selectOpponentPet();
+    hideAndShowNode(document.querySelector('#selectAttack'), 'block');
+    hideAndShowNode(document.querySelector('#selectPet'), 'none');
     return selectPet.id.toUpperCase();
   }
   alert('No has seleccionado una mascota');
@@ -119,7 +121,7 @@ function combatResult() {
     btnAttackFire.disabled = true;
     btnAttackWater.disabled = true;
     btnAttackEarth.disabled = true;
-    restartSectionDisplay(true);
+    hideAndShowNode(document.querySelector('#restart'), 'block');
   }
   
   if (opponent.lives === 0) {
@@ -136,19 +138,14 @@ function restartGame() {
 
 
 // FUNCIONES PARA MOSTRAR O DESAPARECER PARTES DE LA UI
-function selectAttackSectionDisplay(show) {
-  const selectAttackSection = document.querySelector('#selectAttack');
-  selectAttackSection.style.display = (show) ? 'block' : 'none';
-}
-function restartSectionDisplay(show) {
-  const restartSection = document.querySelector('#restart');
-  restartSection.style.display = (show) ? 'block' : 'none';
+function hideAndShowNode(node, display) {
+  node.style.display = display;
 }
 
 // INICIO DEL JUEGO
 function startGame() {
-  selectAttackSectionDisplay(false);
-  restartSectionDisplay(false);
+  hideAndShowNode(document.querySelector('#selectAttack'), 'none');
+  hideAndShowNode(document.querySelector('#restart'), 'none');
   const btnSelectPet = document.querySelector('#buttonSelectPet');
   const btnRestart = document.querySelector('#buttonRestart');
   const btnAttackFire = document.querySelector('#buttonAttackFire');
@@ -157,8 +154,7 @@ function startGame() {
 
   btnSelectPet.onclick = () => {
     player.name = selectPlayerPet();
-    player.name && selectAttackSectionDisplay(true);
-  }
+  };
 
   btnAttackFire.onclick = () => attackPlayer('FUEGO');
   btnAttackWater.onclick = () => attackPlayer('AGUA');

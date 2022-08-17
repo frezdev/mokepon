@@ -1,0 +1,49 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  font-size: 62.5%;
+}
+
+body {
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+.header {
+  color: #fff;
+  width: 100%;
+  display: flex;
+  background: linear-gradient(0deg, #01BAEF, #0B4F6C);
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  padding: 8px;
+}
+.header > .title {
+  font-size: 2.6rem;
+}
+.header > span {
+  font-size: 20px;
+}
+.main {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-height: 100vh;
+  justify-content: center;
+}
+
+.main--select-section {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.main--select-options {
+  display: grid;
+  align-items: center;
+  justify-content: space-between;
+  margin: auto;
+}
