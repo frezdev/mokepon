@@ -4,29 +4,31 @@
   box-sizing: border-box;
 }
 
+@import url('https://fonts.googleapis.com/css2?family=Fredoka+One&display=swap');
 html {
   font-size: 62.5%;
 }
 
 body {
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: 'Fredoka One', cursive;
+  background-color: #1F4690;
 }
 
 .header {
   color: #fff;
   width: 100%;
   display: flex;
-  background: linear-gradient(0deg, #01BAEF, #0B4F6C);
   align-items: center;
   justify-content: center;
   flex-direction: column;
   padding: .8rem;
 }
 .header > .title {
-  font-size: 2.6rem;
+  font-size: 4rem;
+  margin: 1rem 0;
 }
 .header > span {
-  font-size: 2rem;
+  font-size: 3rem;
 }
 .main {
   display: flex;
@@ -42,35 +44,75 @@ body {
   height: auto;
   width: 100%;
   align-items: center;
+  padding: 2rem;
+  margin-top: 5rem;
+}
+
+.main--select-title {
+  color: #fff;
+  font-size: 2rem;
 }
 
 .main--select {
   display: flex;
-  width: 80%;
+  width: 100%;
   flex-direction: column;
   align-items: center;
+  margin-top: 5rem;
 } 
 .main--options-container {
   display: grid;
   align-items: center;
-  grid-template-columns: repeat(auto-fit, 12rem);
-  grid-auto-rows: 12rem;
+  grid-template-columns: repeat(auto-fit, 20rem);
+  grid-auto-rows: 20rem;
   justify-content: center;
-  width: 80%;
+  width: 100%;
   justify-items: center;
   gap: 1rem;
 }
 .main--options-container > label {
+  display: flex;
+  flex-direction: column;
   padding: 1rem;
-  font-size: 1.4rem;
+  font-size: 1.8rem;
   font-weight: 700;
-  background-color: #01BAEF;
-  border-radius: .5rem;
+  border-radius: 1.5rem;
+  cursor: pointer;
+  width: 90%;
+  height: 90%;
+  border: 1px solid #01baef40;
+  color: #01BAEF;
+  justify-content: center;
+  align-items: center;
+  background-color: #01baef40;
+}
+.main--options-container > label:hover {
+  box-shadow: 0 0 10px #01BAEF;
+}
+.main--options-container > label > img {
+  width: 90%;
+}
+
+.main--options-container > input {
+  display: none;
+}
+
+#buttonSelectPet {
+  padding: 1rem;
+  font-size: 1.8rem;
+  font-weight: 700;
+  font-family: inherit;
+  background-color: #FFA500;
+  border-radius: 0.5rem;
   color: #fff;
   cursor: pointer;
   text-align: center;
-  width: 90%;
+  width: 80%;
+  height: 5rem;
+  max-width: 30rem;
+  border: none;
+  margin-top: 5rem;
 }
-.main--options-container > label > input {
-  display: none;
+#buttonSelectPet:hover {
+  box-shadow: 0 0 10px #FFA500;
 }

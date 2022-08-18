@@ -8,14 +8,5 @@ const petsData = [
   {
     name: 'ratigueya'
   },
-  {
-    name: 'langostelvis'
-  },
-  {
-    name: 'tucapalma'
-  },
-  {
-    name: 'pydos'
-  },
 ];
 export default petsData;
