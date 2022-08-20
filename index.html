@@ -22,20 +22,20 @@
           <label for="hipodoge">
             <p>Hipodoge</p>
             <img src="./assets/mokepons_mokepon_hipodoge_attack.png" alt="Hipodoge">
+            <input type="radio" name="pet" id="hipodoge"/>
           </label>
-          <input type="radio" name="pet" id="hipodoge"/>
           
           <label for="capipepo">
             <p>Capipepo</p>
             <img src="./assets/mokepons_mokepon_capipepo_attack.png" alt="Capipepo">
+            <input type="radio" name="pet" id="capipepo"/>
           </label>
-          <input type="radio" name="pet" id="capipepo"/>
     
           <label for="ratigueya">
             <p>Ratigueya</p>
             <img src="./assets/mokepons_mokepon_ratigueya_attack.png" alt="Ratigueya">
+            <input type="radio" name="pet" id="ratigueya"/>
           </label>
-          <input type="radio" name="pet" id="ratigueya"/>
         </div>
         
         <button id="buttonSelectPet" type="button">Seleccionar</button>
@@ -53,21 +53,24 @@
       </div>
 
       <div>
-        <!-- <section id="messages">
-        </section> -->
-
-        <div><p id="result"></p></div>
-        <div><p id="playerAttacks"></p></div>
-        <div><p id="opponentAttacks"></p></div>
-      
+        <section id="messages">
+          <p id="result"></p>
+        </section>
+        
         <section id="restart">
           <button id="buttonRestart">Reiniciar</button>
         </section>
       </div>
-
-      <div>
-        <p>Tu mascota <span id="playerPet"></span> tiene <span id="playerLives">3</span> vidas</p>
-        <p>La mascota <span id="opponentPet"></span> de tu oponente tiene <span id="opponentLives">3</span> vidas</p>
+      
+      <div class="status--game-container">
+        <div class="status--game" id="playerAttacks">
+          <p class="status--game__lives" id="playerLives">3</p>
+          <p class="status--game__name" id="playerPet"></p>
+        </div>
+        <div class="status--game" id="opponentAttacks">
+          <p class="status--game__lives" id="opponentLives">3</p>
+          <p class="status--game__name" id="opponentPet"></p>
+        </div>
       </div>
     </section>
   </main>
