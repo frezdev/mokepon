@@ -11,7 +11,11 @@ html {
 
 body {
   font-family: 'Fredoka One', cursive;
-  background-color: #1F4690;
+  background-image: url('../../assets/background.jpg');
+  background-position: center;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-size: cover;
 }
 
 .header {
@@ -24,8 +28,9 @@ body {
   padding: .8rem;
 }
 .header > .title {
-  font-size: 4rem;
+  font-size: 5rem;
   margin: 1rem 0;
+  text-shadow: 0 .5rem .5rem #202526dc;
 }
 .header > span {
   font-size: 3rem;
@@ -50,7 +55,9 @@ body {
 
 .main--select-title {
   color: #fff;
-  font-size: 2rem;
+  text-shadow: 0 1px 5px #202526dc;
+  font-size: 3rem;
+  text-align: center;
 }
 
 .main--select {
@@ -80,14 +87,15 @@ body {
   cursor: pointer;
   width: 90%;
   height: 90%;
-  border: 1px solid #01baef40;
-  color: #01BAEF;
+  /* border: 1px solid #2d343640; */
+  color: #fff;
+  text-shadow: 0 1px 5px #2d343676;
   justify-content: center;
   align-items: center;
-  background-color: #01baef40;
+  background: linear-gradient(135deg, #ffffff77, #2d34362c, #2d34362c);
 }
 .main--options-container > label:hover {
-  box-shadow: 0 0 10px #01BAEF;
+  box-shadow: 2px 0 10px #ffffff77;
 }
 .main--options-container > label > img {
   width: 90%;
@@ -115,4 +123,33 @@ body {
 }
 #buttonSelectPet:hover {
   box-shadow: 0 0 10px #FFA500;
+}
+
+#selectAttack {
+  flex-direction: column;
+  align-items: center;
+  color: #fff;
+}
+#selectAttack > h2 {
+  text-shadow: 0 1px 5px #202526dc;
+  font-size: 3rem;
+}
+
+.buttons-attack-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.button-attack {
+  background-color: #3e6643;
+  color: #fff;
+  padding: .5rem 1rem;
+  border: none;
+  width: 10rem;
+  height: 3.5rem;
+  border-radius: 50px;
+  box-shadow: 0 1px 5px #202526dc;
+  cursor: pointer;
+  margin: 1rem;
 }

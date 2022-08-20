@@ -46,7 +46,7 @@ function selectPlayerPet() {
   if (selectPet) {
     playerPet.innerText = selectPet.id.toUpperCase()
     opponent.name = selectOpponentPet();
-    hideAndShowNode(document.querySelector('#selectAttack'), 'block');
+    hideAndShowNode(document.querySelector('#selectAttack'), 'flex');
     hideAndShowNode(document.querySelector('#selectPet'), 'none');
     return selectPet.id.toUpperCase();
   }
@@ -91,8 +91,11 @@ function selectOpponentPet() {
 
 // MOSTRAR MENSAJE
 function createMessage() {
-  const messageContainer = document.querySelector('#messages');
-  messageContainer.innerHTML = '';
+  const resultMessage = document.querySelector('#result');
+  const playerAttacks = document.querySelector('#playerAttacks');
+  const opponentAttacks = document.querySelector('#opponentAttacks');
+
+  // FALTA TERMINAR AQUI
 
   const result = combat(player, opponent);
 

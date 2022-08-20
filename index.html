@@ -11,7 +11,6 @@
 <body>
   <header class="header">
     <h1 class="title">MOKEPON!</h1>
-    <span>🔥💧🌱</span>
   </header>
 
   <main class="main">
@@ -45,26 +44,31 @@
     </section>
   
     <section id="selectAttack">
-      <div>
-        <h2>Elige tu ataque:</h2>
+      <h2>Elige tu ataque</h2>
+
+      <div class="buttons-attack-container">
+        <button id="buttonAttackFire" class="button-attack">Fuego 🔥</button>
+        <button id="buttonAttackWater" class="button-attack">Agua 💧</button>
+        <button id="buttonAttackEarth" class="button-attack">Tierra 🌱</button>
       </div>
+
+      <div>
+        <!-- <section id="messages">
+        </section> -->
+
+        <div><p id="result"></p></div>
+        <div><p id="playerAttacks"></p></div>
+        <div><p id="opponentAttacks"></p></div>
+      
+        <section id="restart">
+          <button id="buttonRestart">Reiniciar</button>
+        </section>
+      </div>
+
       <div>
         <p>Tu mascota <span id="playerPet"></span> tiene <span id="playerLives">3</span> vidas</p>
         <p>La mascota <span id="opponentPet"></span> de tu oponente tiene <span id="opponentLives">3</span> vidas</p>
       </div>
-      <div>
-        <button id="buttonAttackFire">Fuego 🔥</button>
-        <button id="buttonAttackWater">Agua 💧</button>
-        <button id="buttonAttackEarth">Tierra 🌱</button>
-      </div>
-    </section>
-  
-    <section id="messages">
-      <!-- <p>Tu mascota atacó con FUEGO, la mascota de tu oponente atacó con TIERRA - GANASTE 🎉</p> -->
-    </section>
-  
-    <section id="restart">
-      <button id="buttonRestart">Reiniciar</button>
     </section>
   </main>
 </body>
