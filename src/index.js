@@ -125,7 +125,7 @@ function combatResult() {
     btnAttackFire.disabled = true;
     btnAttackWater.disabled = true;
     btnAttackEarth.disabled = true;
-    hideAndShowNode(document.querySelector('#restart'), 'block');
+    hideAndShowNode(document.querySelector('#restart'), 'flex');
   }
   
   if (opponent.lives === 0) {

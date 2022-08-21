@@ -38,9 +38,10 @@ body {
 .main {
   display: flex;
   flex-direction: column;
-  min-height: 50vh;
+  /* min-height: 50vh; */
   justify-content: center;
   align-items: center;
+  margin-top: 4rem;
 }
 
 .main--select-section {
@@ -105,15 +106,18 @@ body {
   display: none;
 }
 
+button {
+  font-family: inherit;
+  cursor: pointer;
+  font-weight: 700;
+
+}
 #buttonSelectPet {
   padding: 1rem;
   font-size: 1.8rem;
-  font-weight: 700;
-  font-family: inherit;
   background-color: #FFA500;
   border-radius: 0.5rem;
   color: #fff;
-  cursor: pointer;
   text-align: center;
   width: 80%;
   height: 5rem;
@@ -151,8 +155,25 @@ body {
   height: 3.5rem;
   border-radius: 50px;
   box-shadow: 0 1px 5px #202526dc;
-  cursor: pointer;
   margin: 1rem;
+}
+
+#messages > #result {
+  font-size: 2rem;
+  text-shadow: 0 1px 5px #202526dc;
+}
+
+#restart > #buttonRestart {
+  width: 80%;
+  height: 3rem;
+  border-radius: 55rem;
+  background-color: #FFA500;
+  color: #fff;
+  border: none;
+  margin: 2rem auto;
+}
+#restart > #buttonRestart:hover {
+  box-shadow: 0 0 10px #FFA500;
 }
 
 .status--game-container {
