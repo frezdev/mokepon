@@ -94,9 +94,12 @@ body {
   justify-content: center;
   align-items: center;
   background: linear-gradient(135deg, #ffffff77, #2d34362c, #2d34362c);
+  transition: .3s;
 }
 .main--options-container > label:hover {
-  box-shadow: 2px 0 10px #ffffff77;
+  width: 95%;
+  height: 95%;
+  box-shadow: 0 5px 15px #2d34362c;
 }
 .main--options-container > label > img {
   width: 90%;
