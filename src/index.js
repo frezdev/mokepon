@@ -1,6 +1,30 @@
 import getRandomNumber from "./utils/getRandomNumber.js";
 import petsData from "./utils/petsData.js";
 
+const btnAttackFire = document.querySelector('#buttonAttackFire');
+const btnAttackWater = document.querySelector('#buttonAttackWater');
+const btnAttackEarth = document.querySelector('#buttonAttackEarth');
+
+const selectAttackSection = document.querySelector('#selectAttack');
+
+const btnRestartSection = document.querySelector('#restart');
+
+const playerLivesMessage = document.querySelector('#playerLives');
+const opponentLivesMessage = document.querySelector('#opponentLives');
+
+const playerPet = document.querySelector('#playerPet');
+
+const opponentPet = document.querySelector('#opponentPet');
+
+const resultMessage = document.querySelector('#result');
+const playerAttacks = document.querySelector('#playerAttacks');
+const opponentAttacks = document.querySelector('#opponentAttacks');
+
+const petsNodesList = document.getElementsByName('pet');
+const btnSelectPet = document.querySelector('#buttonSelectPet');
+const btnRestart = document.querySelector('#buttonRestart');
+
+
 const player = {
   lives: 3,
 };
@@ -9,11 +33,8 @@ const opponent = {
 };
 
 
-
 function combat(player, opponent) {
-  const playerLivesMessage = document.querySelector('#playerLives');
-  const opponentLivesMessage = document.querySelector('#opponentLives');
-  
+
   let result;
   if (player.attack === opponent.attack) {
     result = 'EMPATE';
@@ -29,25 +50,22 @@ function combat(player, opponent) {
   playerLivesMessage.innerText = player.lives;
   opponentLivesMessage.innerText = opponent.lives;
 
-  
   return result;
 }
 
 
 // SELECCIONAR MASCOTA DEL USUARIO
-function selectPlayerPet(petsNodesList) {
-  const playerPet = document.querySelector('#playerPet');
-  
+function selectPlayerPet(petsNodesList) {  
   const petsList = [...petsNodesList];
 
-  const selectPet = petsList.find(pet => pet.checked);
-  
-  if (selectPet) {
-    playerPet.innerText = selectPet.id.toUpperCase()
+  const selectedPet = petsList.find(pet => pet.checked);
+
+  if (selectedPet) {
+    playerPet.innerText = selectedPet.id.toUpperCase()
     opponent.name = selectOpponentPet();
-    hideAndShowNode(document.querySelector('#selectAttack'), 'flex');
+    hideAndShowNode(selectAttackSection, 'flex');
     hideAndShowNode(document.querySelector('#selectPet'), 'none');
-    return selectPet.id.toUpperCase();
+    return selectedPet.id.toUpperCase();
   }
   alert('No has seleccionado una mascota');
 }
@@ -77,12 +95,10 @@ function attackPlayer(attack) {
 
 // SELECCIONAR MASCOTA ALEATORIA
 function selectOpponentPet() {
-  const opponentPet = document.querySelector('#opponentPet');
-
   const random = getRandomNumber(0, 2);
 
   const randomPet = petsData.slice(random, random + 1);
-  
+
   opponentPet.innerText = randomPet[0].name.toUpperCase();
   return randomPet[0].name.toUpperCase();
 }
@@ -90,10 +106,6 @@ function selectOpponentPet() {
 
 // MOSTRAR MENSAJE
 function createMessage() {
-  const resultMessage = document.querySelector('#result');
-  const playerAttacks = document.querySelector('#playerAttacks');
-  const opponentAttacks = document.querySelector('#opponentAttacks');
-
   const newPlayerAttack = document.createElement('p'); 
   const newOpponentAttack = document.createElement('p');
   newPlayerAttack.classList.add('status--game__attack');
@@ -106,7 +118,7 @@ function createMessage() {
   opponentAttacks.appendChild(newOpponentAttack);
 
   const result = combat(player, opponent);
-  
+
   if (player.lives > 0 && opponent.lives > 0) {
     resultMessage.innerText = result;
   } else {
@@ -117,17 +129,14 @@ function createMessage() {
 
 // VERIFICACION DEL RESULTADO DELCOMBATE
 function combatResult() {
-  const btnAttackFire = document.querySelector('#buttonAttackFire');
-  const btnAttackWater = document.querySelector('#buttonAttackWater');
-  const btnAttackEarth = document.querySelector('#buttonAttackEarth');
 
   if (opponent.lives === 0 || player.lives === 0) {
     btnAttackFire.disabled = true;
     btnAttackWater.disabled = true;
     btnAttackEarth.disabled = true;
-    hideAndShowNode(document.querySelector('#restart'), 'flex');
+    hideAndShowNode(btnRestartSection, 'flex');
   }
-  
+
   if (opponent.lives === 0) {
     return 'GANASTE!!! 🎉';
   } else if (player.lives === 0) {
@@ -148,14 +157,8 @@ function hideAndShowNode(node, display) {
 
 // INICIO DEL JUEGO
 function startGame() {
-  hideAndShowNode(document.querySelector('#selectAttack'), 'none');
-  hideAndShowNode(document.querySelector('#restart'), 'none');
-  const petsNodesList = document.getElementsByName('pet');
-  const btnSelectPet = document.querySelector('#buttonSelectPet');
-  const btnRestart = document.querySelector('#buttonRestart');
-  const btnAttackFire = document.querySelector('#buttonAttackFire');
-  const btnAttackWater = document.querySelector('#buttonAttackWater');
-  const btnAttackEarth = document.querySelector('#buttonAttackEarth');
+  hideAndShowNode(selectAttackSection, 'none');
+  hideAndShowNode(btnRestartSection, 'none');
 
   petsNodesList.forEach(item => {
     item.parentNode.onclick = () => {

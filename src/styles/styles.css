@@ -173,9 +173,9 @@ button {
 }
 
 .status--game-container {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  width: 100%;
   margin-top: 2rem;
 }
 .status--game {
