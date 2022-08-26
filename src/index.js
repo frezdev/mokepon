@@ -1,6 +1,12 @@
 import getRandomNumber from "./utils/getRandomNumber.js";
 import petsData from "./utils/petsData.js";
 
+const hipodogeImg = '../assets/mokepons_mokepon_hipodoge_attack.png';
+const capipepoImg = '../assets/mokepons_mokepon_capipepo_attack.png';
+const ratigueyaImg = '../assets/mokepons_mokepon_ratigueya_attack.png';
+
+const optionsContainer = document.querySelector('#optionsContainer');
+
 const btnAttackFire = document.querySelector('#buttonAttackFire');
 const btnAttackWater = document.querySelector('#buttonAttackWater');
 const btnAttackEarth = document.querySelector('#buttonAttackEarth');
@@ -24,7 +30,7 @@ const petsNodesList = document.getElementsByName('pet');
 const btnSelectPet = document.querySelector('#buttonSelectPet');
 const btnRestart = document.querySelector('#buttonRestart');
 
-
+const mokepones = [];
 const player = {
   lives: 3,
 };
@@ -32,6 +38,45 @@ const opponent = {
   lives: 3,
 };
 
+class Mokepon {
+  constructor(name, image, lives, id) {
+    this.name = name;
+    this.image = image;
+    this.lives = lives;
+    this.attacks = [];
+    this.id = id;
+  }
+}
+
+const hipodoge = new Mokepon('Hipodoge', hipodogeImg, 3, 'hipodoge');
+
+const capipepo = new Mokepon('Capipepo', capipepoImg, 3, 'capipepo');
+
+const ratigueya = new Mokepon('Ratigueya', ratigueyaImg, 3, 'ratigueya');
+
+hipodoge.attacks.push(
+  { name: '💧', id: 'buttonAttackWater' },
+  { name: '💧', id: 'buttonAttackWater' },
+  { name: '💧', id: 'buttonAttackWater' },
+  { name: '🔥', id: 'buttonAttackFire' },
+  { name: '🌱', id: 'buttonAttackEarth' },
+);
+capipepo.attacks.push(
+  { name: '🌱', id: 'buttonAttackEarth' },
+  { name: '🌱', id: 'buttonAttackEarth' },
+  { name: '🌱', id: 'buttonAttackEarth' },
+  { name: '💧', id: 'buttonAttackWater' },
+  { name: '🔥', id: 'buttonAttackFire' },
+);
+ratigueya.attacks.push(
+  { name: '🔥', id: 'buttonAttackFire' },
+  { name: '🔥', id: 'buttonAttackFire' },
+  { name: '🔥', id: 'buttonAttackFire' },
+  { name: '🌱', id: 'buttonAttackEarth' },
+  { name: '💧', id: 'buttonAttackWater' },
+);
+
+mokepones.push(hipodoge, capipepo, ratigueya);
 
 function combat(player, opponent) {
 
@@ -155,10 +200,29 @@ function hideAndShowNode(node, display) {
   node.style.display = display;
 }
 
+
+// Template HTML
+function MokeponItem(mokepon) {
+  return (/*html*/`
+    <label for="${mokepon.id}">
+      <p>${mokepon.name}</p>
+      <img src="${mokepon.image}" alt="${mokepon.image}">
+      <input type="radio" name="pet" id="${mokepon.id}"/>
+    </label>
+  `);
+}
+
+
 // INICIO DEL JUEGO
 function startGame() {
   hideAndShowNode(selectAttackSection, 'none');
   hideAndShowNode(btnRestartSection, 'none');
+
+  mokepones.forEach(mokepon => {
+    const card = document.createRange()
+      .createContextualFragment(MokeponItem(mokepon))
+    optionsContainer.append(card);
+  })
 
   petsNodesList.forEach(item => {
     item.parentNode.onclick = () => {
