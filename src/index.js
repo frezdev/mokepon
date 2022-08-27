@@ -7,9 +7,12 @@ const ratigueyaImg = '../assets/mokepons_mokepon_ratigueya_attack.png';
 
 const optionsContainer = document.querySelector('#optionsContainer');
 
-const btnAttackFire = document.querySelector('#buttonAttackFire');
-const btnAttackWater = document.querySelector('#buttonAttackWater');
-const btnAttackEarth = document.querySelector('#buttonAttackEarth');
+const ButtonsAttacksContainer = document.querySelector('#ButtonsAttacksContainer');
+let btnAttackFire;
+let btnAttackWater;
+let btnAttackEarth;
+
+let butonAttack;
 
 const selectAttackSection = document.querySelector('#selectAttack');
 
@@ -31,28 +34,24 @@ const btnSelectPet = document.querySelector('#buttonSelectPet');
 const btnRestart = document.querySelector('#buttonRestart');
 
 const mokepones = [];
-const player = {
-  lives: 3,
-};
-const opponent = {
-  lives: 3,
-};
+
+let player;
+let opponent;
 
 class Mokepon {
-  constructor(name, image, lives, id) {
+  constructor(name, image, lives) {
     this.name = name;
     this.image = image;
     this.lives = lives;
     this.attacks = [];
-    this.id = id;
   }
 }
 
-const hipodoge = new Mokepon('Hipodoge', hipodogeImg, 3, 'hipodoge');
+const hipodoge = new Mokepon('Hipodoge', hipodogeImg, 3);
 
-const capipepo = new Mokepon('Capipepo', capipepoImg, 3, 'capipepo');
+const capipepo = new Mokepon('Capipepo', capipepoImg, 3);
 
-const ratigueya = new Mokepon('Ratigueya', ratigueyaImg, 3, 'ratigueya');
+const ratigueya = new Mokepon('Ratigueya', ratigueyaImg, 3);
 
 hipodoge.attacks.push(
   { name: '💧', id: 'buttonAttackWater' },
@@ -84,7 +83,7 @@ function combat(player, opponent) {
   if (player.attack === opponent.attack) {
     result = 'EMPATE';
   }
-  else if ((player.attack === 'FUEGO' && opponent.attack === 'TIERRA') || (player.attack === 'AGUA' && opponent.attack === 'FUEGO') || (player.attack === 'TIERRA' && opponent.attack === 'AGUA')) {
+  else if ((player.attack === '🔥' && opponent.attack === '🌱') || (player.attack === '💧' && opponent.attack === '🔥') || (player.attack === '🌱' && opponent.attack === '💧')) {
     opponent.lives--;
     result = 'GANASTE!!!';
   }
@@ -100,14 +99,16 @@ function combat(player, opponent) {
 
 
 // SELECCIONAR MASCOTA DEL USUARIO
-function selectPlayerPet(petsNodesList) {  
+function selectPlayerPet(petsNodesList) {
   const petsList = [...petsNodesList];
 
   const selectedPet = petsList.find(pet => pet.checked);
 
   if (selectedPet) {
-    playerPet.innerText = selectedPet.id.toUpperCase()
-    opponent.name = selectOpponentPet();
+    const mokepon = mokepones.find(mokepon => mokepon.name === selectedPet.id);
+    player = {...mokepon};
+    playerPet.innerText = player.name.toUpperCase();
+    selectOpponentPet();
     hideAndShowNode(selectAttackSection, 'flex');
     hideAndShowNode(document.querySelector('#selectPet'), 'none');
     return selectedPet.id.toUpperCase();
@@ -121,11 +122,11 @@ function opponentAttack() {
   const attackRandom = getRandomNumber(1, 3);
   switch (attackRandom) {
     case 1:
-      return 'FUEGO';
+      return '🔥';
     case 2:
-      return 'AGUA';
+      return '💧';
     default:
-      return 'TIERRA';
+      return '🌱';
   }
 }
 
@@ -140,18 +141,18 @@ function attackPlayer(attack) {
 
 // SELECCIONAR MASCOTA ALEATORIA
 function selectOpponentPet() {
-  const random = getRandomNumber(0, 2);
+  const random = getRandomNumber(0, mokepones.length - 1);
 
-  const randomPet = petsData.slice(random, random + 1);
-
-  opponentPet.innerText = randomPet[0].name.toUpperCase();
-  return randomPet[0].name.toUpperCase();
+  const randomPet = mokepones[random];
+  opponent = {...randomPet};
+  console.log(opponent.attacks)
+  opponentPet.innerText = opponent.name.toUpperCase();
 }
 
 
 // MOSTRAR MENSAJE
 function createMessage() {
-  const newPlayerAttack = document.createElement('p'); 
+  const newPlayerAttack = document.createElement('p');
   const newOpponentAttack = document.createElement('p');
   newPlayerAttack.classList.add('status--game__attack');
   newOpponentAttack.classList.add('status--game__attack');
@@ -201,20 +202,42 @@ function hideAndShowNode(node, display) {
 }
 
 
-// Template HTML
+// Templates HTML
 function MokeponItem(mokepon) {
   return (/*html*/`
-    <label for="${mokepon.id}">
+    <label for=${mokepon.name}>
       <p>${mokepon.name}</p>
-      <img src="${mokepon.image}" alt="${mokepon.image}">
-      <input type="radio" name="pet" id="${mokepon.id}"/>
-    </label>
-  `);
+      <img src=${mokepon.image} alt=${mokepon.image} />
+      <input type="radio" name="pet" id=${mokepon.name} />
+    </label>`
+  );
 }
 
 
+function showAttacks() {
+  const buttons = player.attacks.map(attack => {
+    const button = document.createElement('button');
+    button.id = attack.id;
+    button.classList.add('button-attack');
+    button.innerText = attack.name;
+    button.onclick = () => attackPlayer(attack.name);
+    // falta agregar la validacion para dsabilitar los botones
+    return button
+  });
+  buttons.forEach(button => {
+    ButtonsAttacksContainer.append(button)
+  })
+  console.log(buttons)
+
+  // btnAttackFire = document.querySelector('#buttonAttackFire');
+  // btnAttackWater = document.querySelector('#buttonAttackWater');
+  // btnAttackEarth = document.querySelector('#buttonAttackEarth');
+  // btnAttackFire.onclick = () => attackPlayer('FUEGO');
+  // btnAttackWater.onclick = () => attackPlayer('AGUA');
+  // btnAttackEarth.onclick = () => attackPlayer('TIERRA');
+}
 // INICIO DEL JUEGO
-function startGame() {
+(() => {
   hideAndShowNode(selectAttackSection, 'none');
   hideAndShowNode(btnRestartSection, 'none');
 
@@ -238,14 +261,11 @@ function startGame() {
   });
 
   btnSelectPet.onclick = () => {
-    player.name = selectPlayerPet(petsNodesList);
+    selectPlayerPet(petsNodesList);
+    showAttacks();
   };
 
-  btnAttackFire.onclick = () => attackPlayer('FUEGO');
-  btnAttackWater.onclick = () => attackPlayer('AGUA');
-  btnAttackEarth.onclick = () => attackPlayer('TIERRA');
+
 
   btnRestart.onclick = restartGame;
-}
-
-window.onload = startGame;
+})();
