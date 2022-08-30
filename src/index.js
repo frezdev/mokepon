@@ -177,9 +177,6 @@ function createMessage() {
 function combatResult() {
 
   if (opponent.lives === 0 || player.lives === 0) {
-    btnAttackFire.disabled = true;
-    btnAttackWater.disabled = true;
-    btnAttackEarth.disabled = true;
     hideAndShowNode(btnRestartSection, 'flex');
   }
 
@@ -216,25 +213,25 @@ function MokeponItem(mokepon) {
 
 function showAttacks() {
   const buttons = player.attacks.map(attack => {
+
     const button = document.createElement('button');
     button.id = attack.id;
     button.classList.add('button-attack');
     button.innerText = attack.name;
-    button.onclick = () => attackPlayer(attack.name);
-    // falta agregar la validacion para dsabilitar los botones
+
+    button.onclick = () => {
+      if (opponent.lives === 0 || player.lives === 0) {
+        return buttons.forEach(button => button.disabled = true);
+      }
+      attackPlayer(attack.name);
+    }
+
     return button
   });
+
   buttons.forEach(button => {
     ButtonsAttacksContainer.append(button)
-  })
-  console.log(buttons)
-
-  // btnAttackFire = document.querySelector('#buttonAttackFire');
-  // btnAttackWater = document.querySelector('#buttonAttackWater');
-  // btnAttackEarth = document.querySelector('#buttonAttackEarth');
-  // btnAttackFire.onclick = () => attackPlayer('FUEGO');
-  // btnAttackWater.onclick = () => attackPlayer('AGUA');
-  // btnAttackEarth.onclick = () => attackPlayer('TIERRA');
+  });
 }
 // INICIO DEL JUEGO
 (() => {
