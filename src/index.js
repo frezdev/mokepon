@@ -103,7 +103,6 @@ function selectPlayerPet(petsNodesList) {
   const petsList = [...petsNodesList];
 
   const selectedPet = petsList.find(pet => pet.checked);
-
   if (selectedPet) {
     const mokepon = mokepones.find(mokepon => mokepon.name === selectedPet.id);
     player = {...mokepon};
@@ -116,21 +115,6 @@ function selectPlayerPet(petsNodesList) {
   alert('No has seleccionado una mascota');
 }
 
-
-// ATAQUE ALEATORIO DEL OPONENTE
-function opponentAttack() {
-  const attackRandom = getRandomNumber(1, 3);
-  switch (attackRandom) {
-    case 1:
-      return '🔥';
-    case 2:
-      return '💧';
-    default:
-      return '🌱';
-  }
-}
-
-
 // ATAQUES DEL JUGADOR
 function attackPlayer(attack) {
   player.attack = attack;
@@ -139,14 +123,23 @@ function attackPlayer(attack) {
 }
 
 
+
 // SELECCIONAR MASCOTA ALEATORIA
 function selectOpponentPet() {
   const random = getRandomNumber(0, mokepones.length - 1);
 
   const randomPet = mokepones[random];
   opponent = {...randomPet};
-  console.log(opponent.attacks)
   opponentPet.innerText = opponent.name.toUpperCase();
+}
+
+// ATAQUE ALEATORIO DEL OPONENTE
+function opponentAttack() {
+  const randomNumber = getRandomNumber(0, opponent.attacks.length - 1);
+  const attack = opponent.attacks[randomNumber].name;
+  
+  console.log(attack);
+  return attack;
 }
 
 
@@ -221,16 +214,16 @@ function showAttacks() {
 
     button.onclick = () => {
       if (opponent.lives === 0 || player.lives === 0) {
-        return buttons.forEach(button => button.disabled = true);
+        buttons.forEach(button => button.disabled = true);
+        return;
       }
       attackPlayer(attack.name);
     }
-
     return button
   });
 
   buttons.forEach(button => {
-    ButtonsAttacksContainer.append(button)
+    ButtonsAttacksContainer.append(button);
   });
 }
 // INICIO DEL JUEGO
@@ -261,8 +254,6 @@ function showAttacks() {
     selectPlayerPet(petsNodesList);
     showAttacks();
   };
-
-
 
   btnRestart.onclick = restartGame;
 })();

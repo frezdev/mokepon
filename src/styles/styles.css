@@ -176,6 +176,7 @@ button {
   display: grid;
   grid-template-columns: 1fr 1fr;
   width: 100%;
+  place-items: center;
   margin-top: 2rem;
 }
 .status--game {
