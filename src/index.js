@@ -8,11 +8,6 @@ const ratigueyaImg = '../assets/mokepons_mokepon_ratigueya_attack.png';
 const optionsContainer = document.querySelector('#optionsContainer');
 
 const ButtonsAttacksContainer = document.querySelector('#ButtonsAttacksContainer');
-let btnAttackFire;
-let btnAttackWater;
-let btnAttackEarth;
-
-let butonAttack;
 
 const selectAttackSection = document.querySelector('#selectAttack');
 
@@ -35,8 +30,12 @@ const btnRestart = document.querySelector('#buttonRestart');
 
 const mokepones = [];
 
-let player;
-let opponent;
+let player = {
+  usedAttacks: [],
+};
+let opponent = {
+  usedAttacks: [],
+};
 
 class Mokepon {
   constructor(name, image, lives) {
@@ -105,7 +104,7 @@ function selectPlayerPet(petsNodesList) {
   const selectedPet = petsList.find(pet => pet.checked);
   if (selectedPet) {
     const mokepon = mokepones.find(mokepon => mokepon.name === selectedPet.id);
-    player = {...mokepon};
+    player = {...player, ...mokepon};
     playerPet.innerText = player.name.toUpperCase();
     selectOpponentPet();
     hideAndShowNode(selectAttackSection, 'flex');
@@ -119,6 +118,8 @@ function selectPlayerPet(petsNodesList) {
 function attackPlayer(attack) {
   player.attack = attack;
   opponent.attack = opponentAttack();
+  player.usedAttacks.push(attack);
+  console.log('player', player.usedAttacks)
   createMessage();
 }
 
@@ -129,7 +130,7 @@ function selectOpponentPet() {
   const random = getRandomNumber(0, mokepones.length - 1);
 
   const randomPet = mokepones[random];
-  opponent = {...randomPet};
+  opponent = {...opponent, ...randomPet};
   opponentPet.innerText = opponent.name.toUpperCase();
 }
 
@@ -137,8 +138,8 @@ function selectOpponentPet() {
 function opponentAttack() {
   const randomNumber = getRandomNumber(0, opponent.attacks.length - 1);
   const attack = opponent.attacks[randomNumber].name;
-  
-  console.log(attack);
+  opponent.usedAttacks.push(attack);
+  console.log('opponent', opponent.usedAttacks);
   return attack;
 }
 
@@ -218,6 +219,7 @@ function showAttacks() {
         return;
       }
       attackPlayer(attack.name);
+      button.style.background = '#112f58';
     }
     return button
   });
